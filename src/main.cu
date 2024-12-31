@@ -1,7 +1,7 @@
 #include <iostream>
 #include "common/cuda_utils.cuh"
 #include "common/matrix.cuh"
-#include "kernels/gemm_v1.cu"
+#include "kernels/gemm_v0.cu"
 
 int main(int argc, char** argv) {
     const int M = 1024;
@@ -22,7 +22,15 @@ int main(int argc, char** argv) {
     CudaTimer timer;
     timer.start();
     
-    gemm_v1(A, B, C);
+    float alpha = 1.0f;
+    float beta = 0.0f;
+    
+    gemm_v0<float>(M, N, K, &alpha,
+                   A.device_ptr(), M,  // lda = M
+                   B.device_ptr(), K,  // ldb = K
+                   &beta,
+                   C.device_ptr(), M,  // ldc = M
+                   0);  // default stream
     
     float ms = timer.stop();
     
