@@ -1,0 +1,27 @@
+# Build directories
+build/
+_build/
+cmake-build*/
+
+# IDE specific
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Compiled files
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.cu.o
+
+# Benchmark results
+benchmarks/results/*
+!benchmarks/results/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class 
