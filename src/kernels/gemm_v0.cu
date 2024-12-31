@@ -44,7 +44,7 @@ void gemm_v0(size_t m, size_t n, size_t k, T const* alpha,
     gemm_v0_kernel<T><<<grid_dim, block_dim, 0U, stream>>>(
         m, n, k, *alpha, A, lda, B, ldb, *beta, C, ldc);
 
-    CUDA_CHECK();
+    CUDA_CHECK(cudaGetLastError());
 }
 
 // Explicit template instantiations
